@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add New Book - Online Library</title>
+</head>
+<body>
+  <hr>
+  <header id="navbar-container"></header> <!--The navigation bar will be dynamically added with JS-->
+
+  <h1>Add New Book</h1>
+  <p>Fill in the form below to add a new book to the library.</p>
+
+  <form  method="post" action="" >
+
+    <label for="bookId">Book ID:</label><br>
+    <input type="number" id="bookid" name="bookid" placeholder="Enter book ID" min="1" required /><br><br>
+
+    <label for="bookName">Book Name:</label><br>
+    <input type="text" id="bookname" name="bookname" placeholder="Enter book name" required /><br><br>
+
+    <label for="author">Author:</label><br>
+    <input type="text" id="author" name="author" placeholder="Enter author name" required /><br><br>
+
+    <label for="category">Category:</label><br>
+    <select id="category" name="category" required>
+      <option value="" disabled selected>--Select Category--</option>
+      <option value="fiction">Fiction</option>
+      <option value="nonfiction">Non-Fiction</option>
+      <option value="religious">Religious</option>
+      <option value="science">Science</option>
+      <option value="history">History</option>
+      <option value="technology">Technology</option>
+      <option value="biography">Biography</option>
+      <option value="children">Children</option>
+      <option value="other">Other</option>
+    </select><br><br>
+
+    <label for="description">Description:</label><br>
+    <textarea id="description" name="description" rows="4" cols="40"
+              placeholder="Enter book description" required></textarea><br><br>
+
+    <input type="submit" value="Add Book" />
+    <input type="reset" value="Clear" />
+
+  </form>
+
+</body>
+</html>

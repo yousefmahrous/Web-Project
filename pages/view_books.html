@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Books - Online Library</title>
+</head>
+<body>
+    <header id="navbar-container"></header> <!--The navigation bar will be dynamically added with JS-->
+    <main>
+        <h1>Library Catalog</h1>
+        <p>Browse all books available in the Online Library system.</p>
+        
+        <fieldset>
+            <legend>Display Options</legend>
+            <form action="#" method="GET">
+                <label for="view_status">Show Status:</label>
+                <select id="view_status" name="view_status">
+                    <option value="all">All Books</option>
+                    <option value="available">Available</option>
+                    <option value="borrowed">Not Available (Borrowed)</option>
+                </select>
+                <button type="submit">Refresh List</button>
+            </form>
+        </fieldset>
+
+        <br>
+
+        <table border="1" width="100%" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Book ID</th>
+                    <th>Book Name</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="7" align="center">
+                        <em>No books to display. Please add books or adjust filters.</em>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+</body>
+</html>
