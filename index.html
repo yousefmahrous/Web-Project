@@ -3,47 +3,68 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="images/logo.png" type="image/png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="css/home.css">
         <meta name = "discription" content="This is HomePage"/>
-        <title>Online Library</title>
+        <title>Readify-ريديفاي </title>
     </head>
     <body>
-        <h1>Home Page </h1>
-        <h1 style="text-align: center;">Online Library</h1>
-        <header id="navbar-container"></header> <!--The navigation bar will be dynamically added with JS-->
+        <nav class="navbar">
+            <div class="left-side">
+                <img src="images/logo.png" alt="Logo" class="nav-logo-img">
+                <h1 class="logo">Readify</h1>
+                <a href="pages/about.html" class="about-link">About Us</a>
+            </div>
+            <div class="right-side">
+                <a href="pages/login.html" class="btn btn-login">LogIn</a>
+                <a href="pages/signup.html" class="btn btn-signup">SignUp</a>
+            </div>
+        </nav>
+        <!-- <iframe src="pages/navbar.html" style="width: 100%; border: none; height: 80px;"></iframe> -->
+        
+        <div id="navbar-container"></div>
+        <!-- <header class="navbar-container"></header> The navigation bar will be dynamically added with JS -->
        
         <hr>
-        <h2 style="text-align:right;">Search Book</h2>
-        <input type="text" placeholder="Enter book name" style="float: right;">
-        <button style="float:right;">Search </button>
-        <h2>&nbsp;Display Books</h2>
-        <details>
-        <summary>Title</summary>
-        <p>The content of Fiction books...</p>
-        </details>
+        <div class="search-section">
+            <h3>Search Book</h3>
+            <div class="search-group">
+                <input type="text" id="bookSearchInput" placeholder="Enter book name">
+                <button type="button" id="searchBtn" class="search-btn">Search</button>
+            </div>
+        <hr>
+        <div class="main-page-container" style="display: flex;">
+            <div class="sidebar">
+                <h2>Display Books</h2>
+                
+                <details>
+                    <summary>Title</summary>
+                    <div id="filter-title" class="filter-options"></div>
+                </details>
 
-        <details>
-        <summary>Author</summary>
-        <p>The content of Author...</p>
-        </details>
+                <details>
+                    <summary>Author</summary>
+                    <div id="filter-author" class="filter-options"></div>
+                </details>
 
-        <details>
-        <summary>Genre</summary>
-        <p>The content of Genre...</p>
-        </details>
+                <details>
+                    <summary>Genre</summary>
+                    <div id="filter-genre" class="filter-options"></div>
+                </details>
 
-        <details>
-        <summary>Series</summary>
-        <p>The content of Series...</p>
-        </details>
-
-        <details>
-        <summary>Format</summary>
-        <p>The content of Format...</p>
-        </details>
-
-        <details>
-        <summary>Price</summary>
-        <p>The content of Price...</p>
-        </details>
+                <details>
+                    <summary>Price</summary>
+                    <div id="filter-price" class="filter-options"></div>
+                </details>
+            </div>
+            <main class="content-area">
+                <div id="search-results" class="books-display-container">
+                </div>
+            </main>
+        </div>
+        <script src="js/home.js"></script>
     </body>
 </html>
