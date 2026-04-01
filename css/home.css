@@ -15,34 +15,31 @@ html {
     --secondry-color: #202c29;
     --background: linear-gradient(135deg, var(--main-color), var(--secondry-color));
 }
+
 body {
     background-color: #fdf5f2; 
-    
-}
-.filter-options {
-    padding: 5px;
-    display: flex;
-    flex-direction: column; 
-    gap: 2px;
-    border-radius: 4px;
+    padding-top: 150px;
 }
 
-.filter-options label {
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    /* gap: ; */
-}
-.navbar {
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 1001; 
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
+    padding: 0 5%;
     background: var(--background); 
     color: white; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    box-sizing: border-box; 
 }
+
 .left-side {
     display: flex;
     align-items: center;
@@ -61,6 +58,7 @@ body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     text-transform: uppercase;
+    cursor: pointer;
     letter-spacing: 1px;
 }
 
@@ -149,6 +147,22 @@ body {
     align-items: flex-start; 
     width: 100%;
     min-height: 100vh;
+}
+
+.filter-options {
+    padding: 5px;
+    display: flex;
+    flex-direction: column; 
+    gap: 2px;
+    border-radius: 4px;
+}
+
+.filter-options label {
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    /* gap: ; */
 }
 
 .content-area {
