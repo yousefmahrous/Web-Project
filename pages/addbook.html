@@ -1,49 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Add New Book - Online Library</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="css/addbook.css">
+    <link rel="icon" type="image/png" href="imgs/logo.png">
+    <script src="js/addbook.js"></script>
+    <title>Add New Book</title>
 </head>
+
 <body>
-  <hr>
-  <header id="navbar-container"></header> <!--The navigation bar will be dynamically added with JS-->
 
-  <h1>Add New Book</h1>
-  <p>Fill in the form below to add a new book to the library.</p>
+    <section class="container">
+        <div class="wrapper">
 
-  <form  method="post" action="" >
+            
+            <header id="navbar-container"></header>
 
-    <label for="bookId">Book ID:</label><br>
-    <input type="number" id="bookid" name="bookid" placeholder="Enter book ID" min="1" required /><br><br>
+            
+            <h1>Add New Book</h1>
+            <p>Fill in the form below to add a new book to the library.</p>
 
-    <label for="bookName">Book Name:</label><br>
-    <input type="text" id="bookname" name="bookname" placeholder="Enter book name" required /><br><br>
+            
+            <form id="addForm" method="post" action="">
 
-    <label for="author">Author:</label><br>
-    <input type="text" id="author" name="author" placeholder="Enter author name" required /><br><br>
+                
+                <div>
+                    <label for="bookid">Book ID</label>
+                    <input type="number" id="bookid" name="bookid"
+                           placeholder="Book ID" min="1" >
+                </div>
 
-    <label for="category">Category:</label><br>
-    <select id="category" name="category" required>
-      <option value="" disabled selected>--Select Category--</option>
-      <option value="fiction">Fiction</option>
-      <option value="nonfiction">Non-Fiction</option>
-      <option value="religious">Religious</option>
-      <option value="science">Science</option>
-      <option value="history">History</option>
-      <option value="technology">Technology</option>
-      <option value="biography">Biography</option>
-      <option value="children">Children</option>
-      <option value="other">Other</option>
-    </select><br><br>
+                
+                <div>
+                    <label for="bookname">Book Name</label>
+                    <input type="text" id="bookname" name="bookname"
+                           placeholder="Book Name" >
+                </div>
 
-    <label for="description">Description:</label><br>
-    <textarea id="description" name="description" rows="4" cols="40"
-              placeholder="Enter book description" required></textarea><br><br>
+                
+                <div>
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author"
+                           placeholder="Author Name" >
+                </div>
 
-    <input type="submit" value="Add Book" />
-    <input type="reset" value="Clear" />
+                
+                <div>
+                    <label for="category">Category</label>
+                    <select id="category" name="category" >
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="nonfiction">Non-Fiction</option>
+                        <option value="religious">Religious</option>
+                        <option value="science">Science</option>
+                        <option value="history">History</option>
+                        <option value="technology">Technology</option>
+                        <option value="biography">Biography</option>
+                        <option value="children">Children</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
 
-  </form>
+                
+                <div>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description"
+                              placeholder="Book Description" rows="4" ></textarea>
+                </div>
+
+                
+                <div>
+                    <button type="submit">Add Book</button>
+                    <button type="reset" id="clearButton">Clear</button>
+                </div>
+
+            </form>
+
+        </div>
+    </section>
 
 </body>
 </html>
