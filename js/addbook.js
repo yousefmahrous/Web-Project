@@ -1,5 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    const navContainer = document.getElementById('navbar-container');
+    
+    if (navContainer) {
+        fetch('navbar.html') 
+            .then(response => {
+                if (response.ok) return response.text();
+                throw new Error('Navbar file not found');
+            })
+            .then(data => {
+                navContainer.innerHTML = data;
+                console.log("Navbar loaded!");
+            })
+            .catch(err => console.error("Error loading navbar:", err));
+    }
+
+
     const form = document.getElementById("addForm");
     const clearBtn = document.getElementById("clearButton");
 
