@@ -21,7 +21,7 @@ body {
     padding-top: 150px;
 }
 
-.topbar {
+/* .topbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -60,6 +60,10 @@ body {
     text-transform: uppercase;
     cursor: pointer;
     letter-spacing: 1px;
+}
+
+.logo-link:active, .logo-link:visited {
+    color: white ;
 }
 
 .about-link {
@@ -115,9 +119,9 @@ body {
 .btn-signup:hover {
     background-color: var(--main-color);
     color: white;
-}
+} */
 
-.search-section {
+/* .search-section {
     text-align: right;
     margin: 10px 2%;
     font-family: 'Roboto', sans-serif;
@@ -133,7 +137,8 @@ body {
 .search-group {
     display: flex;
     justify-content: flex-end; 
-}
+} */
+
  /* for display books */
 
  .sidebar {
@@ -181,7 +186,6 @@ details {
 summary {
     padding: 15px 0;
     font-size: 24px; 
-    font-family: 'serif'; 
     list-style: none; 
     display: flex;
     justify-content: space-between;
@@ -210,7 +214,6 @@ details p {
 }
 
 h2 {
-    font-family: 'serif';
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 10px;
