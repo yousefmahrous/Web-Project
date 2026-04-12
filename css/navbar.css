@@ -46,6 +46,10 @@
     box-sizing: border-box; 
 }
 
+h1.logo {
+    color: #fff;
+}
+
 .left-side {
     display: flex;
     align-items: center;
