@@ -6,7 +6,7 @@
 
 body {
     font-family: "Roboto", sans-serif;
-    background-color: #f8f9fa;
+    background-color: #f7f1f2;
     margin: 0;
     padding-top: 150px; /* ✅ بدل 160 */
     color: var(--secondry-color);
