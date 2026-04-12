@@ -1,71 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Borrow Book - Online Library</title>
-    </head>
-    <body>
-        <header id="navbar-container"></header> <!--The navigation bar will be dynamically added with JS-->
-        <main>
-            <h1>Borrow a Book</h1>
-            <p>Only books marked as <strong>Available</strong> can be borrowed.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Borrow a book from Knowledge Library">
+    <link rel="shortcut icon" href="../images/logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/borrow_book.css">
+    <title>Borrow Book - Knowledge Library</title>
+</head>
+<body>
 
-            <!-- Section: List of available books (dynamically generated) -->
-            <h2>Currently Available Books</h2>
-            <table border="1" cellpadding="8">
-                <thead>
-                    <tr>
-                        <th>Book ID</th>
-                        <th>Book Name</th>
-                        <th>Author</th>
-                        <th>Category</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data will be populated from server. No hardcoded values. -->
-                    <tr>
-                        <td colspan="4">No available books at the moment.</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div id="navbar-container"></div>
 
-            <!-- Borrow form -->
-            <h2>Request Borrow</h2>
-            <form action="borrowed_books.html" method="POST">
-                <fieldset>
-                    <legend>Borrowing Details</legend>
+    <main class="main-content">
 
-                    <p>
-                        <label for="book_id"><strong>Select Book:</strong></label><br>
-                        <!-- Dropdown will be populated dynamically with available books -->
-                        <select id="book_id" name="book_id" required>
-                            <option value="">-- Choose an available book --</option>
-                            <!-- Options will be added here dynamically -->
-                        </select>
-                    </p>
+        <!-- Book Info Card (filled by JS from URL ?id=) -->
+        <section class="book-preview" id="book-preview">
+            <div class="book-preview-inner">
+                <img id="preview-cover" src="" alt="Book cover" style="display:none;">
+                <div class="book-preview-info">
+                    <h2 id="preview-title">Loading book…</h2>
+                    <p id="preview-author"></p>
+                    <p id="preview-category"></p>
+                    <span id="preview-status" class="status-badge"></span>
+                </div>
+            </div>
+        </section>
 
-                    <p>
-                        <label for="username"><strong>Your Username:</strong></label><br>
-                        <input type="text" id="username" name="username" required placeholder="Enter your username">
-                    </p>
+        <!-- Not-available notice (hidden by default) -->
+        <div id="unavailable-notice" class="notice notice-error" style="display:none;">
+            <p>This book is currently <strong>not available</strong> for borrowing. Please check back later or choose another book.</p>
+            <a href="view_books.html" class="btn-back">← Back to Catalog</a>
+        </div>
 
-                    <p>
-                        <label for="borrow_date"><strong>Borrow Date:</strong></label><br>
-                        <input type="date" id="borrow_date" name="borrow_date" required>
-                    </p>
+        <!-- Borrow Form -->
+        <section class="form-card" id="borrow-section">
+            <h2>Borrow Request</h2>
+            <p class="subtitle">Only books marked as <strong>Available</strong> can be borrowed.</p>
 
-                    <p>
-                        <label for="return_date"><strong>Expected Return Date:</strong></label><br>
-                        <input type="date" id="return_date" name="return_date" required>
-                    </p>
+            <form id="borrowForm" novalidate>
 
-                    <p>
-                        <button type="submit">Borrow Book</button>
-                        <button type="reset">Clear Form</button>
-                    </p>
-                </fieldset>
+                <!-- Hidden: book id comes from URL -->
+                <input type="hidden" id="book_id" name="book_id">
+
+                <div class="form-group">
+                    <label for="username">Your Username <span class="required">*</span></label>
+                    <input type="text" id="username" name="username"
+                           placeholder="Enter your username" autocomplete="username">
+                    <span class="error-msg" id="err-username"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="borrow_date">Borrow Date <span class="required">*</span></label>
+                        <input type="date" id="borrow_date" name="borrow_date">
+                        <span class="error-msg" id="err-borrow_date"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="return_date">Expected Return Date <span class="required">*</span></label>
+                        <input type="date" id="return_date" name="return_date">
+                        <span class="error-msg" id="err-return_date"></span>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="submitBtn" class="btn-primary">Confirm Borrow</button>
+                    <button type="reset" class="btn-secondary">Clear</button>
+                    <a href="view_books.html" class="btn-back">← Back to Catalog</a>
+                </div>
+
             </form>
 
-        </main>
-    </body>
+            <!-- Success message (hidden by default) -->
+            <div id="success-msg" class="notice notice-success" style="display:none;">
+                <p>✅ Your borrow request has been submitted successfully!</p>
+                <a href="view_books.html" class="btn-back">← Back to Catalog</a>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Knowledge Library. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/borrow_book.js"></script>
+</body>
 </html>
