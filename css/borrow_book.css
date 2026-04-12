@@ -17,7 +17,7 @@ html {
     --main-color: #cf617d;
     --secondry-color: #202c29;
     --background: linear-gradient(135deg, var(--main-color), var(--secondry-color));
-    --bg-page: #fdf5f2;
+    --bg-page: #f7f1f2;
     --card-bg: #fff;
     --border: #eee;
     --text-muted: #888;
@@ -64,6 +64,11 @@ body {
     max-width: 700px;
     margin: 0 auto;
     padding: 30px 20px 50px;
+}
+
+/* ===== NAVBAR ===== */
+.navbar ul {
+    background-color: #f7f1f2;
 }
 
 /* ===== BOOK PREVIEW CARD ===== */
@@ -206,18 +211,19 @@ label {
 input[type="text"],
 input[type="date"] {
     padding: 11px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
+    border: 1px solid #fff;
+    border-radius: 20px;
     font-size: 0.95rem;
     font-family: "Roboto", sans-serif;
     color: var(--secondry-color);
-    background: var(--bg-page);
+    background: #e4e4e4;
     outline: none;
     transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 input:focus {
     border-color: var(--main-color);
+    background: #fff;
     box-shadow: 0 0 0 3px rgba(207,97,125,0.12);
 }
 
