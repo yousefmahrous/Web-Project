@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/logo.png" type="image/png">
+    <link rel="stylesheet"  href="../css/addbook.css">
+    <link rel="icon" type="image/png" href="imgs/logo.png">
+    <title>Add New Book</title>
+</head>
+
+<body>
+
+    <section class="container">
+        <div class="wrapper">
+
+            
+            <header id="navbar-container"></header>
+
+            
+            <h1>Add New Book</h1>
+            <p>Fill in the form below to add a new book to the library.</p>
+
+            
+            <form id="addForm" method="post" action="">
+
+                
+                <div>
+                    <label for="bookid">Book ID</label>
+                    <input type="number" id="bookid" name="bookid"
+                           placeholder="Book ID" min="1" >
+                </div>
+
+                
+                <div>
+                    <label for="bookname">Book Name</label>
+                    <input type="text" id="bookname" name="bookname"
+                           placeholder="Book Name" >
+                </div>
+
+                
+                <div>
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author"
+                           placeholder="Author Name" >
+                </div>
+
+                
+                <div>
+                    <label for="category">Category</label>
+                    <select id="category" name="category" >
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="nonfiction">Non-Fiction</option>
+                        <option value="religious">Religious</option>
+                        <option value="science">Science</option>
+                        <option value="history">History</option>
+                        <option value="technology">Technology</option>
+                        <option value="biography">Biography</option>
+                        <option value="children">Children</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                
+                <div>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description"
+                              placeholder="Book Description" rows="4" ></textarea>
+                </div>
+
+                
+                <div>
+                    <button type="submit">Add Book</button>
+                    <button type="reset" id="clearButton">Clear</button>
+                </div>
+
+            </form>
+
+        </div>
+    </section>
+    <script src="../js/addbook.js"></script>
+
+</body>
+</html>
