@@ -1,0 +1,148 @@
+* {
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --main-color: #cf617d;
+    --secondry-color: #202c29;
+    --background: linear-gradient(135deg, var(--main-color), var(--secondry-color));
+}
+
+body {
+    background: #f7f1f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 150px;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+.wrapper {
+    width: 400px;         
+    padding: 1.2rem 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    margin: 20px;
+}
+
+
+.container .wrapper > h1 {
+    font-size: 1.5rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+
+form div {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--secondry-color);
+}
+
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #fff;
+    background: #e4e4e4;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--main-color);
+    background: #fff;
+}
+
+
+textarea {
+    resize: none;
+}
+
+
+button {
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #fff;
+    background: var(--background);
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 5px;
+    transition: 0.3s;
+}
+
+button[type="button"] {
+    background: #555; 
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+
+form:last-of-type button[type="submit"]:hover {
+    background: #e70606;
+}
+
+
+.error {
+    border: 2px solid #cf617d !important;
+    background: #fff6f8 !important;
+}
+
+
+.error-msg {
+    display: block;
+    margin-top: 6px;
+    padding: 8px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    background: #cf617d;
+}

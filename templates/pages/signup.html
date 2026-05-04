@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+    <section class="container">
+        <div class="wrapper">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+            <h1>Signup</h1>
+            <form id="signupForm" onsubmit="validate(event)">
+                <div>
+                    <input id="username" type="text" name="username" placeholder="Username">
+                </div>
+                <div>
+                    <input id="email" type="email" name="email" placeholder="Email">
+                </div>
+                <div>
+                    <input id="password" type="password" name="password" placeholder="Password">
+                </div>
+                <div>
+                    <input id="confirm" type="password" name="confirm" placeholder="Confirm Password">
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="is_admin" value="Admin">
+                        Admin
+                    </label>
+                    <label>
+                        <input type="radio" name="is_admin" value="User">
+                        User
+                    </label>
+                </div>
+                <br>
+                <button type="submit">Signup</button>
+            </form>
+            <div class="member">
+                <p>Do you have an account? <a href="{% url 'login_page' %}">Log in</a></p>
+                <a id="home" href="/">Home</a>
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'js/signup.js' %}"></script>
+</body>
+</html>

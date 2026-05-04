@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="images/logo.png" type="image/png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="css/home.css">
+        <meta name = "discription" content="This is HomePage"/>
+        <title>Readify-ريديفاي </title>
+    </head>
+    <body>
+
+        <div id="navbar-container"></div>
+        
+        <!-- <hr>
+        <div class="search-section">
+            <h3>Search Book</h3>
+            <div class="search-group">
+                <input type="text" id="bookSearchInput" placeholder="Enter book name">
+                <button type="button" id="searchBtn" class="search-btn">Search</button>
+            </div> -->
+        <hr> 
+        <div class="main-page-container" style="display: flex;">
+            <div class="sidebar">
+                <h2>Display Books</h2>
+                
+                <details>
+                    <summary>Title</summary>
+                    <div id="filter-title" class="filter-options"></div>
+                </details>
+
+                <details>
+                    <summary>Author</summary>
+                    <div id="filter-author" class="filter-options"></div>
+                </details>
+
+                <details>
+                    <summary>Genre</summary>
+                    <div id="filter-genre" class="filter-options"></div>
+                </details>
+
+                <details>
+                    <summary>Price</summary>
+                    <div id="filter-price" class="filter-options"></div>
+                </details>
+            </div>
+            <main class="content-area">
+                <div id="search-results" class="books-display-container">
+                </div>
+            </main>
+        </div>
+        <script src="js/home.js"></script>
+    </body>
+</html>
