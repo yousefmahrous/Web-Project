@@ -22,12 +22,10 @@ const navContainer = document.getElementById('navbar-container');
       document.getElementById('navbar-placeholder').innerHTML = data;
    });
 
-    const searchInput = document.getElementById("bookSearchInput");
-    const searchBtn = document.getElementById("searchBtn");
     const resultsContainer = document.getElementById("search-results");
 
     try {
-        const response = await fetch('/api/books'); 
+        const response = await fetch('http://127.0.0.1:8000/api/books/');
         if (!response.ok) throw new Error("API not responding");
         
         ALL_BOOKS_DATA = await response.json();
@@ -40,26 +38,7 @@ const navContainer = document.getElementById('navbar-container');
         console.error("API is not working:", error);
         if (resultsContainer) resultsContainer.innerHTML = "<p>Unable to load books at the moment.</p>";
     }
-    // search 
-    if (searchBtn) {
-        searchBtn.addEventListener("click", async (e) => {
-            e.preventDefault();
-            const query = searchInput.value.trim().toLowerCase();
 
-            if (query === "") {
-                displayBooks(ALL_BOOKS_DATA, resultsContainer); 
-                return;
-            }
-
-            resultsContainer.innerHTML = "Searching..."; 
-
-            const filtered = ALL_BOOKS_DATA.filter(book => 
-                book.title.toLowerCase().includes(query)
-            );
-            
-            displayBooks(filtered, resultsContainer);
-        });
-    }
 });
 
 // --- Helpers functions ---
@@ -68,7 +47,7 @@ function buildFilters(books) {
     //  To cancel the repetition of the name
     const titles = [...new Set(books.map(b => b.title))];
     const authors = [...new Set(books.map(b => b.author))];
-    const genres = [...new Set(books.map(b => b.genre))];
+    const genres = [...new Set(books.map(b => b.category))];
     const prices = [...new Set(books.map(b => b.price))].sort((a, b) => a - b);
 
     renderOptions("filter-title", titles, "title");
@@ -87,7 +66,7 @@ function handleFilterChange() {
     const filtered = ALL_BOOKS_DATA.filter(book => {
         const titleMatch = selectedTitles.length === 0 || selectedTitles.includes(book.title);
         const authorMatch = selectedAuthors.length === 0 || selectedAuthors.includes(book.author);
-        const genreMatch = selectedGenres.length === 0 || selectedGenres.includes(book.genre);
+        const genreMatch = selectedGenres.length === 0 || selectedGenres.includes(book.category);
         return titleMatch && authorMatch && genreMatch;
     });
 
@@ -114,17 +93,18 @@ function displayBooks(books, container) {
     if (!container) return;
     container.innerHTML = ""; 
 
-    if (books.length === 0) {
-        container.innerHTML = "<p>No books found.</p>";
-        return;
-    }
-
-    books.forEach(book => {
+books.forEach(book => {
         const card = document.createElement("div");
         card.className = "book-card";
         card.innerHTML = `
-            <strong>${book.title}</strong>
-            <p>${book.author || 'Unknown'}</p>
+            <div class="book-image-wrapper">
+                <img src="http://127.0.0.1:8000${book.image}" alt="${book.title}">
+            </div>
+            <div class="book-info">
+                <h3 class="book-title">${book.title}</h3>
+                <p class="book-author">By: ${book.author}</p>
+                <span class="book-category">${book.category}</span>
+            </div>
         `;
         container.appendChild(card);
     });

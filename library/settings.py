@@ -2,13 +2,11 @@
 Django settings for library_project project.
 """
 
-# امسح الـ import القديمة وحط دول
 import os
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
 
-# بعد الـ imports مباشرة
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -111,5 +109,8 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ALLOW_ALL_ORIGINS = True

@@ -21,126 +21,6 @@ body {
     padding-top: 150px;
 }
 
-/* .topbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    z-index: 1001; 
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5%;
-    background: var(--background); 
-    color: white; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    
-    box-sizing: border-box; 
-}
-
-.left-side {
-    display: flex;
-    align-items: center;
-    gap: 10px; 
-}
-
-.nav-logo-img {
-    height: 70px; 
-    width: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 0 5px rgba(255,255,255,0.2)); 
-}
-
-.logo {
-    font-size: 24px;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    text-transform: uppercase;
-    cursor: pointer;
-    letter-spacing: 1px;
-}
-
-.logo-link:active, .logo-link:visited {
-    color: white ;
-}
-
-.about-link {
-    color: white; 
-    text-decoration: none;
-    margin-left: 100px;
-    font-size: 16px;
-    font-weight: 500;
-    display: inline-block; 
-    transition: transform 0.3s ease, color 0.3s ease; 
-}
-
-.about-link:hover {
-    transform: scale(1.2); 
-    opacity: 1;
-    color: #fff; 
-    cursor: pointer;
-}
-
-.about-link:active {
-    transform: scale(0.95); 
-}
- .right-side {
-    display: flex;
-    gap: 15px;
-    
-} 
-
-.btn {
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: 0.3s; 
-}
-
-.btn-login {
-    color: white;
-    border: 1px solid white;
-    margin-right: 10px;
-}
-
-.btn-login:hover {
-    background: white;
-    color: var(--main-color);
-}
-
-.btn-signup {
-    background-color: white;
-    color: var(--secondry-color);
-}
-
-.btn-signup:hover {
-    background-color: var(--main-color);
-    color: white;
-} */
-
-/* .search-section {
-    text-align: right;
-    margin: 10px 2%;
-    font-family: 'Roboto', sans-serif;
-}
-
-.search-section h3 {
-    color: var(--secondry-color);
-    margin-bottom: 5px;
-    margin-right: 2px;
-    font-size: 1.2rem;
-}
-
-.search-group {
-    display: flex;
-    justify-content: flex-end; 
-} */
-
- /* for display books */
-
  .sidebar {
     border-right: 2px solid #747272; 
     padding-right: 15px; 
@@ -224,9 +104,9 @@ h2 {
 /* books continar*/
 .books-display-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-    gap: 20px;
-    
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 25px;
+    padding: 20px;
 }
 
 /* books card*/
@@ -238,6 +118,15 @@ h2 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: 0.3s;
     text-align: center;
+}
+
+.book-card img {
+    width: 100%;
+    height: 150px; 
+    object-fit: cover; 
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: block;
 }
 
 .book-card:hover {
