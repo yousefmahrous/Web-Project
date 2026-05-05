@@ -8,6 +8,7 @@ urlpatterns = [
     path('api/accounts/', include('accounts.urls')),
     path('', include('accounts.urls')),
     path('', include('books.urls')),
+    path('api/', include('borrow.urls')),
 ]
 
 if settings.DEBUG:
