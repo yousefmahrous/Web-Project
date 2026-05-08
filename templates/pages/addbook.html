@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/addbook.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'imgs/logo.png' %}">
+    <title>Add New Book</title>
+<base target="_blank">
+</head>
+<body>
+    {% include 'includes/navbar.html' %}
+
+    <section class="container">
+        <div class="wrapper">
+            <h1>Add New Book</h1>
+            <p>Fill in the form below to add a new book to the library.</p>
+
+            <form id="addForm" enctype="multipart/form-data">
+                <div>
+                    <label for="bookid">Book ID <span style="color: #e70606;">*</span></label>
+                    <input type="number" id="bookid" name="bookid" placeholder="Book ID (e.g. 101)" min="1">
+                </div>
+                <div>
+                    <label for="bookname">Book Name <span style="color: #e70606;">*</span></label>
+                    <input type="text" id="bookname" name="title" placeholder="Book Name">
+                </div>
+                <div>
+                    <label for="author">Author <span style="color: #e70606;">*</span></label>
+                    <input type="text" id="author" name="author" placeholder="Author Name">
+                </div>
+                <div>
+                    <label for="category">Category <span style="color: #e70606;">*</span></label>
+                    <select id="category" name="category">
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="nonfiction">Non-Fiction</option>
+                        <option value="religious">Religious</option>
+                        <option value="science">Science</option>
+                        <option value="history">History</option>
+                        <option value="technology">Technology</option>
+                        <option value="biography">Biography</option>
+                        <option value="children">Children</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="description">Description <span style="color: #e70606;">*</span></label>
+                    <textarea id="description" name="description" placeholder="Book Description (min 10 characters)" rows="4"></textarea>
+                </div>
+                <div>
+                    <label for="image">Book Cover <span style="color: #777; font-size: 12px;">(Optional)</span></label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                </div>
+                <div>
+                    <button type="submit">Add Book</button>
+                    <button type="button" id="clearButton">Clear</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script src="{% static 'js/addbook.js' %}"></script>
+</body>
+</html>

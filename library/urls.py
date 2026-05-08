@@ -5,10 +5,15 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/accounts/', include('accounts.urls')),
-    path('', include('accounts.urls')),
-    path('api/books/', include('books.urls')),
-    path('api/', include('borrow.urls')),
+
+    # ✅ API Routes
+    path('api/accounts/', include('accounts.urls')),   # /api/accounts/login/ , /api/accounts/signup/
+    path('api/books/', include('books.api_urls')),     # /api/books/create/ , /api/books/<id>/
+    path('api/borrow/', include('borrow.urls')),       # /api/borrow/
+
+    # ✅ Template Routes
+    path('books/', include('books.template_urls')),    # /books/add/ , /books/edit/ , /books/admin-list/
+    path('', include('accounts.urls')),                # /login-page/ , /signup-page/
 ]
 
 if settings.DEBUG:

@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:8000/api';
+const API_URL = '/api';
 
 function showError(fieldId, message) {
   const field = document.getElementById(fieldId);
@@ -84,7 +84,10 @@ function validate(e) {
 
   fetch(`${API_URL}/accounts/signup/`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
     body: JSON.stringify({
       username,
       email,
@@ -94,17 +97,28 @@ function validate(e) {
     })
   })
   .then(res => {
-    if (!res.ok) throw res;
+    if (!res.ok) {
+      return res.json().then(err => { throw new Error(Object.values(err)[0] || 'Signup failed'); });
+    }
     return res.json();
   })
   .then(data => {
-    localStorage.setItem('token', data.token);
+    console.log('Signup response:', data);
+    
+    const token = data.token || data.access;
+    if (!token) {
+      throw new Error('No token received from server');
+    }
+    
+    localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(data.user));
-    window.location.href = '../index.html';
+    
+    console.log('Token saved:', token);
+    
+    window.location.href = '/';
   })
-  .catch(async err => {
-    const data = await err.json();
-    const firstError = Object.values(data)[0];
-    showError('username', firstError || 'Signup failed');
+  .catch(err => {
+    console.error('Signup error:', err);
+    showError('username', err.message || 'Signup failed');
   });
 }

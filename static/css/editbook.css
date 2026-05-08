@@ -1,0 +1,253 @@
+* {
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --main-color: #cf617d;
+    --secondry-color: #202c29;
+    --background: linear-gradient(135deg, var(--main-color), var(--secondry-color));
+}
+
+body {
+    background: #f7f1f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 150px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.wrapper {
+    width: 450px;
+    padding: 1.5rem 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    margin: 20px;
+}
+
+.container .wrapper > h1 {
+    font-size: 1.5rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+
+.book-info-panel {
+    background: linear-gradient(135deg, #f8f4f5, #fff);
+    border: 1px solid #e4d5d8;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dashed #e4d5d8;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--secondry-color);
+    font-size: 13px;
+}
+
+.info-value {
+    color: #666;
+    font-size: 13px;
+}
+
+form div {
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--secondry-color);
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #fff;
+    background: #e4e4e4;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--main-color);
+    background: #fff;
+}
+
+form input[readonly] {
+    background: #d0d0d0;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+textarea {
+    resize: none;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.button-group button {
+    flex: 1;
+}
+
+button {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #fff;
+    background: var(--background);
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 5px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#cancelButton {
+    background: #777;
+}
+
+#cancelButton:hover {
+    background: #555;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.btn-danger {
+    background: #e70606 !important;
+}
+
+.btn-danger:hover {
+    background: #c00505 !important;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.btn-danger:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.error {
+    border: 2px solid #cf617d !important;
+    background: #fff6f8 !important;
+}
+
+.error-msg {
+    display: block;
+    margin-top: 6px;
+    padding: 8px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    background: #cf617d;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+hr {
+    margin: 25px 0;
+    border: none;
+    border-top: 2px solid #e4e4e4;
+}
+
+
+.dirty-warning {
+    background: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    display: none;
+}
+
+.dirty-warning.show {
+    display: block;
+}
+

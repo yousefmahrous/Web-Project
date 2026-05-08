@@ -4,7 +4,11 @@ from .models import User
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
-    list_display = ('username', 'email', 'is_admin', 'is_staff')
+    list_display = ['username', 'email', 'is_admin', 'is_staff', 'is_active', 'date_joined']
+    list_filter = ['is_admin', 'is_staff', 'is_active', 'date_joined']
+    search_fields = ['username', 'email']
+    ordering = ['-date_joined']
+
     fieldsets = UserAdmin.fieldsets + (
         ('Custom Fields', {'fields': ('is_admin',)}),
     )

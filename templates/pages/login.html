@@ -1,14 +1,9 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
 </head>
 <body>
@@ -16,7 +11,8 @@
         <div class="wrapper">
             <img src="{% static 'images/logo.png' %}" alt="Logo">
             <h1>Login</h1>
-            <form id="loginForm" onsubmit="validate(event)">
+            <form onsubmit="validate(event)" action="" method="post">
+                {% csrf_token %}
                 <div>
                     <input id="username" type="text" name="username" placeholder="Username">
                 </div>
@@ -27,7 +23,8 @@
             </form>
             <div class="member">
                 <p>Don't have an account? <a href="{% url 'signup_page' %}">Signup</a></p>
-                <a id="home" href="/">Home</a>
+                
+                <a href="/">Home</a>
             </div>
         </div>
     </section>
