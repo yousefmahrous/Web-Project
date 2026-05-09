@@ -2,18 +2,21 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from accounts.views import login_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', login_page, name='home'),
 
     # ✅ API Routes
-    path('api/accounts/', include('accounts.urls')),   # /api/accounts/login/ , /api/accounts/signup/
-    path('api/books/', include('books.api_urls')),     # /api/books/create/ , /api/books/<id>/
-    path('api/borrow/', include('borrow.urls')),       # /api/borrow/
+    path('api/accounts/', include('accounts.urls')),
+    path('api/books/', include('books.api_urls')),
+    path('api/borrow/', include('borrow.urls')),
 
     # ✅ Template Routes
-    path('books/', include('books.template_urls')),    # /books/add/ , /books/edit/ , /books/admin-list/
-    path('', include('accounts.urls')),                # /login-page/ , /signup-page/
+    path('books/', include('books.template_urls')),
+    path('borrow/', include('borrow.urls')),
+    path('', include('accounts.urls')),
 ]
 
 if settings.DEBUG:

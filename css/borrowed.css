@@ -8,52 +8,28 @@ body {
     font-family: "Roboto", sans-serif;
     background-color: #f7f1f2;
     margin: 0;
-    padding-top: 150px; /* ✅ بدل 160 */
+    padding-top: 120px;
     color: var(--secondry-color);
 }
 
-
-
-/* navbar يبقى في أعلى الصفحة */
+/* Navbar container */
 #navbar-container {
     position: fixed;
-    top: 0; /* ✅ بدل 100px */
+    top: 0;
     left: 0;
     width: 100%;
     z-index: 999;
 }
 
-/* شكل navbar زي ما هو (borrowed أصلاً مظبوط) */
-.navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.navbar ul li a {
-    text-decoration: none;
-    color: #444;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.navbar ul li a:hover {
-    color: var(--main-color);
-}
-
-/* المحتوى */
+/* Main content */
 main {
     max-width: 900px;
     margin: 30px auto;
     padding: 0 20px;
 }
 
-.user-panel-card, 
+/* Cards */
+.user-panel-card,
 .books-card {
     background: white;
     padding: 25px;
@@ -70,6 +46,7 @@ h2 {
     justify-content: space-between;
 }
 
+/* Counter */
 .counter-badge {
     background-color: var(--main-color);
     color: white;
@@ -78,11 +55,14 @@ h2 {
     font-size: 0.8rem;
 }
 
+/* Borrow list */
 #Borrowed-Books {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
+/* Book item */
 .book-item {
     display: flex;
     justify-content: space-between;
@@ -94,13 +74,14 @@ h2 {
 .book-info strong {
     display: block;
     font-size: 1.1rem;
+    margin-bottom: 5px;
 }
 
-.book-info span {
+.book-info small {
     color: var(--main-color);
-    font-size: 0.9rem;
 }
 
+/* Return button */
 .return-btn {
     background: transparent;
     border: 1px solid #ff4d4d;
@@ -114,4 +95,12 @@ h2 {
 .return-btn:hover {
     background: #ff4d4d;
     color: white;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #666;
 }

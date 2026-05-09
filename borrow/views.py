@@ -6,7 +6,7 @@ from .models import Borrow
 from .serializers import BorrowSerializer
 from books.models import Book
 from datetime import datetime
-
+from django.shortcuts import render
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -40,3 +40,8 @@ def return_book(request, borrow_id):
     borrow.book.save()
 
     return Response({"message": "Book returned successfully"})
+
+
+
+def borrowed_books_page(request):
+    return render(request, 'pages/borrowed_books.html')
