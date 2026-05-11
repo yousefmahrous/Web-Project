@@ -1,7 +1,3 @@
-"""
-Django settings for library_project project.
-"""
-
 import os
 from pathlib import Path
 from datetime import timedelta
@@ -15,6 +11,10 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key-change-me')
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']
+
+# CSRF Settings
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000']
+CSRF_COOKIE_SECURE = False
 
 INSTALLED_APPS = [
     'django.contrib.admin',
