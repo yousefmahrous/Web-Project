@@ -1,0 +1,85 @@
+:root {
+    --main-color: #cf617d;
+    --secondry-color: #202c29;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #f7f1f2;
+    margin: 0;
+    /* ✅ مساحة كافية عشان الكروت تبدأ بعد الـ Nav بمسافة مريحة */
+    padding-top: 160px; 
+    color: var(--secondry-color);
+}
+
+#navbar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.user-panel-card, .books-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-left: 10px solid var(--main-color);
+}
+
+h2 {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.counter-badge {
+    background-color: var(--main-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+}
+
+#Borrowed-Books {
+    list-style: none;
+    padding: 0;
+}
+
+.book-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.return-btn {
+    background: transparent;
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+    padding: 7px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.return-btn:hover {
+    background: #ff4d4d;
+    color: white;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}

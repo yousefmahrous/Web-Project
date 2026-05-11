@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #f7f1f2;
+    /* ✅ أهم سطر: بيدي مساحة للمحتوى عشان يظهر من تحت الـ Navbar الثابتة */
+    padding-top: 200px !important; 
+    display: block !important; /* بيضمن إن الصفحة مش مخفية */
+}
+
+
+#navbar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+    
+    opacity: 1 !important; 
+    transform: none !important;
+}
+
+
+section {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-left: 10px solid #cf617d;
+}
+
+h2 {
+    color: #cf617d;
+    margin-bottom: 15px;
+}
+
+
+.nav-logo-img {
+    width: 50px !important;
+    height: auto !important;
+}

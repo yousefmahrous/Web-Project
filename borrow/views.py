@@ -2,11 +2,16 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
+
 from .models import Borrow
-from .serializers import BorrowSerializer
+from .serializers import BorrowSerializer, BorrowCreateSerializer
 from books.models import Book
 from datetime import datetime
 from django.shortcuts import render
+
+# ─────────────────────────────────────────────────────────────
+# Khaled's endpoints
+# ─────────────────────────────────────────────────────────────
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -33,9 +38,8 @@ def return_book(request, borrow_id):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-    borrow.returned = True
+    borrow.returned       = True
     borrow.book.available = True
-
     borrow.save()
     borrow.book.save()
 

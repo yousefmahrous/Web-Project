@@ -13,11 +13,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'css/borrowed.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 
 <body>
 
-    <div id="navbar-container"></div>
+    {% include "includes/navbar.html" %}
 
     <main>
         <section class="user-panel-card">
@@ -43,5 +44,6 @@
     </footer>
 
     <script src="{% static 'js/borrowed.js' %}"></script>
+
 </body>
 </html>

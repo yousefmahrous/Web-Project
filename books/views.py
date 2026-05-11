@@ -174,3 +174,15 @@ def edit_book_page(request):
 
 def book_list_admin_page(request):
     return render(request, 'pages/book-list-admin.html')
+
+
+def view_books_page(request):
+    """Serves the main library catalog page — /books/view/"""
+    return render(request, 'pages/view_books.html')
+
+
+def borrow_book_page(request):
+    """Serves the borrow form page — /books/borrow/?id=<book_id>"""
+    book_id = request.GET.get('id')
+    return render(request, 'pages/borrow_book.html', {'book_id': book_id})
+

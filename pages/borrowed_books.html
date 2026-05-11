@@ -12,28 +12,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
 
-    <<link rel="stylesheet" href="{% static 'css/borrowed.css' %}">
+    <link rel="stylesheet" href="{% static 'css/borrowed.css' %}">
 </head>
 
 <body>
 
-    <div id="navbar-container"></div>
+    <div id="navbar-container">
+        {% include 'navbar.html' %}
+    </div>
 
     <main>
         <section class="user-panel-card">
             <h2 id="panel-title">User Panel</h2>
-            <p>Welcome, <strong id="username">User</strong></p>
+            <p>Welcome to your reading dashboard</p> 
         </section>
 
         <section class="books-card">
             <h2>Borrowed Books</h2>
             <details open>
                 <summary>View Your List</summary>
-
                 <ul id="Borrowed-Books">
-                    <!-- Data will be loaded from API -->
-                </ul>
-
+                    </ul>
             </details>
         </section>
     </main>

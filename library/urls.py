@@ -2,11 +2,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from accounts.views import login_page
+from accounts.views import login_page, about_page 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', login_page, name='home'),
+
+    # ✅ مسار صفحة About Us - ده اللي هيخلي اللينك في الـ Nav يشتغل
+    path('about/', about_page, name='about_page'),
 
     # ✅ API Routes
     path('api/accounts/', include('accounts.urls')),

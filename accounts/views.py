@@ -82,3 +82,7 @@ def signup_page(request):
 
 def login_page(request):
     return render(request, 'pages/login.html')
+# accounts/views.py
+def about_page(request):
+    # غيرنا 'about.html' لـ 'pages/about.html' عشان Django يلاقيه
+    return render(request, 'pages/about.html')
