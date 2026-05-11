@@ -1,26 +1,26 @@
 let ALL_BOOKS_DATA = [];    
 document.addEventListener('DOMContentLoaded', async () => {
 
-const navContainer = document.getElementById('navbar-container');
-    if (navContainer) {
-        fetch("pages/navbar.html") 
-            .then(response => {
-                if (response.ok) return response.text();
-                throw new Error('Navbar not found');
-            })
-            .then(data => {
-                navContainer.innerHTML = data;
-                console.log("Navbar loaded in Borrowed page!");
-            })
-            .catch(err => console.error("Nav error:", err));
-    }
+// const navContainer = document.getElementById('navbar-container');
+//     if (navContainer) {
+//         fetch("pages/navbar.html") 
+//             .then(response => {
+//                 if (response.ok) return response.text();
+//                 throw new Error('Navbar not found');
+//             })
+//             .then(data => {
+//                 navContainer.innerHTML = data;
+//                 console.log("Navbar loaded in Borrowed page!");
+//             })
+//             .catch(err => console.error("Nav error:", err));
+//     }
 
    
-   fetch('pages/navbar.html')
-   .then(response => response.text())
-   .then(data => {
-      document.getElementById('navbar-placeholder').innerHTML = data;
-   });
+//    fetch('pages/navbar.html')
+//    .then(response => response.text())
+//    .then(data => {
+//       document.getElementById('navbar-placeholder').innerHTML = data;
+//    });
 
     const resultsContainer = document.getElementById("search-results");
 
@@ -98,7 +98,7 @@ books.forEach(book => {
         card.className = "book-card";
         card.innerHTML = `
             <div class="book-image-wrapper">
-                <img src="http://127.0.0.1:8000${book.image}" alt="${book.title}">
+                <img src="${book.image}" alt="${book.title}">
             </div>
             <div class="book-info">
                 <h3 class="book-title">${book.title}</h3>

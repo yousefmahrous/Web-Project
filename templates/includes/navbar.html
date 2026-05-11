@@ -1,4 +1,4 @@
-{% load static %}
+<!-- <!-- {% load static %}
 <header class="main-header">
     <nav class="topbar">
         <div class="left-side">
@@ -12,12 +12,37 @@
         </div>
 
         <div class="right-side" id="auth-buttons">
-            <a href="/login/" class="btn btn-login">LogIn</a>
-            <a href="/signup/" class="btn btn-signup">SignUp</a>
+            {% if user.is_authenticated %}
+                <span class="user-greeting">Hello, {{ user.username }} {% if user.is_staff %}(Admin){% endif %}</span>
+                <a href="{% url 'logout' %}" class="btn btn-login">Logout</a>
+            {% else %}
+                <a href="{% url 'login_page' %}" class="btn btn-login">LogIn</a>
+                <a href="{% url 'signup_page' %}" class="btn btn-signup">SignUp</a>
+            {% endif %}
         </div>
     </nav>
 
     <nav class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            
+            {% if user.is_authenticated %}
+                <li><a href="/borrow/">Borrow Book</a></li>
+                <li><a href="/search/">Search</a></li>
+                
+                {# تظهر فقط للأدمن #}
+                {% if user.is_staff or user.is_superuser %}
+                    <li><a href="/books/add/">Add Book</a></li>
+                    <li><a href="/books/admin-list/">Edit Book</a></li> 
+                {% endif %}
+                
+                <li><a href="/my-borrows/">Borrowed Books</a></li>
+                <li><a href="/books/">View Books</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- <nav class="navbar">
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/borrow/">Borrow Book</a></li>
@@ -27,6 +52,49 @@
 
             <!-- ✅ Borrowed Books page -->
             <li><a href="/borrow/borrowed-books/">Borrowed Books</a></li>
+        </ul>
+    </nav>
+</header> 
+{% load static %}
+<header class="main-header">
+    <nav class="topbar">
+        <div class="left-side">
+            <a href="{% url 'home' %}" class="img-link">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" class="nav-logo-img">
+            </a>
+            <a href="{% url 'home' %}" class="logo-link">
+                <h1 class="logo">Readify</h1>
+            </a>
+            <a href="/about/" class="about-link">About Us</a>
+        </div>
+
+        <div class="right-side" id="auth-buttons">
+            {% if user.is_authenticated %}
+                <span class="user-greeting">Hello, {{ user.username }} {% if user.is_staff %}(Admin){% endif %}</span>
+                <a href="#" onclick="handleLogout(event)" class="btn btn-login">Logout</a>
+            {% else %}
+                <a href="{% url 'login_page' %}" class="btn btn-login">LogIn</a>
+                <a href="{% url 'signup_page' %}" class="btn btn-signup">SignUp</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'view-books-page' %}">View Books</a></li>
+                
+                <li><a href="/search/">Search</a></li>
+
+                {% if user.is_staff or user.is_superuser %}
+                    <li><a href="{% url 'add-book-page' %}">Add Book</a></li>
+                    <li><a href="{% url 'book-list-admin-page' %}">Edit Books</a></li>
+                {% endif %}
+
+                <li><a href="/my-borrows/">My Borrowed Books</a></li>
+            {% endif %}
         </ul>
     </nav>
 </header>
@@ -60,4 +128,67 @@
         }
     };
 })();
+<<<<<<< HEAD
 </script>
+=======
+</script> -->
+
+{% load static %}
+<header class="main-header">
+    <nav class="topbar">
+        <div class="left-side">
+            <a href="{% url 'home' %}" class="img-link">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" class="nav-logo-img">
+            </a>
+            <a href="{% url 'home' %}" class="logo-link">
+                <h1 class="logo">Readify</h1>
+            </a>
+            <a href="/about/" class="about-link">About Us</a>
+        </div>
+
+        <div class="right-side" id="auth-buttons">
+        {% if user.is_authenticated %}
+        <span class="user-greeting">Hello, {{ user.username }} (Admin)</span>
+        <a href="#" onclick="handleLogout(event)" class="btn btn-login">Logout</a>
+        {% else %}
+        <a href="{% url 'login_page' %}" class="btn btn-login">LogIn</a>
+        <a href="{% url 'signup_page' %}" class="btn btn-signup">SignUp</a>
+        {% endif %}
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'view-books-page' %}">View Books</a></li>
+            <li><a href="/search/">Search</a></li>
+            {% if user.is_authenticated %}
+                
+
+            {% if user.is_staff or user.is_superuser %}
+                <li><a href="{% url 'add-book-page' %}">Add Book</a></li>
+                <li><a href="{% url 'book-list-admin-page' %}">Edit Books</a></li>
+            {% endif %}
+
+                <li><a href="/my-borrows/">My Borrowed Books</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<script>
+function handleLogout(e) {
+    if (e) e.preventDefault();
+    
+    if (confirm('Are you sure you want to logout?')) {
+        // localStorage.removeItem('token');
+        // localStorage.removeItem('access_token');
+        // localStorage.removeItem('user');
+        localStorage.clear(); 
+        window.location.href = '/logout/';
+        
+        // window.location.href = '/login-page/'; 
+    }
+}
+</script>
+>>>>>>> 59363e2895372ad8cf83a7d5b11057eec4da5ed2

@@ -5,6 +5,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404, render
 from django.db import IntegrityError
 
+from django.shortcuts import render
 from .models import Book
 from .serializers import BookSerializer
 
@@ -186,3 +187,8 @@ def borrow_book_page(request):
     book_id = request.GET.get('id')
     return render(request, 'pages/borrow_book.html', {'book_id': book_id})
 
+<<<<<<< HEAD
+=======
+def home_view(request):
+    return render(request, 'pages/index.html')
+>>>>>>> 59363e2895372ad8cf83a7d5b11057eec4da5ed2
