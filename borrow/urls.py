@@ -1,17 +1,12 @@
 from django.urls import path
-from .views import my_borrows, return_book, borrowed_books_page
-from .views import my_borrows, return_book, borrow_book
+from .views import my_borrows, return_book, borrowed_books_page, borrow_book
 
 urlpatterns = [
-    # Khaled's endpoints
-    path('my-borrows/', my_borrows, name='my_borrows'),   # GET  /api/borrow/my-borrows/
-    path('return/<int:borrow_id>/', return_book, name='return_book'),  # POST /api/borrow/return/<id>/
+    # 1. صفحة عرض الكتب المستعارة (الخاصة بخالد)
+    path('borrowed-books/', borrowed_books_page, name='borrowed_books_page'),
 
-    # Template page
-    path('borrowed-books/', borrowed_books_page, name='borrowed_books_page'),  # GET /borrow/borrowed-books/
-]
-
-urlpatterns = [
-    # Mahmoud's endpoint
-    path('',                        borrow_book, name='borrow_book'),  # POST /api/borrow/
+    # 2. روابط الـ API والعمليات (خالد ومحمود)
+    path('my-borrows/', my_borrows, name='my_borrows'),
+    path('return/<int:borrow_id>/', return_book, name='return_book'),
+    path('', borrow_book, name='borrow_book'),
 ]
