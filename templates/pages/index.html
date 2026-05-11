@@ -1,18 +1,21 @@
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
+        {% load static %}
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="images/logo.png" type="image/png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
-        <link rel="stylesheet" href="css/home.css">
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <link rel="stylesheet" href="{% static 'css/navbar.css' %}"> 
         <meta name = "discription" content="This is HomePage"/>
         <title>Readify-ريديفاي </title>
     </head>
     <body>
-
+        {% include 'includes/navbar.html' %}
         <div id="navbar-container"></div>
         
     
@@ -46,6 +49,6 @@
                 </div>
             </main>
         </div>
-        <script src="js/home.js"></script>
+        <script src="{% static 'js/home.js' %}"></script>
     </body>
 </html>

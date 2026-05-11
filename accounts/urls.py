@@ -3,12 +3,15 @@ from .views import SignupView, LoginView, LogoutView, MeView, signup_page, login
 
 urlpatterns = [
     
-    path('signup/', SignupView.as_view(), name='signup'),
-    path('login/', LoginView.as_view(), name='login'),
+    path('login/', login_page, name='login_page'),
+    path('signup/', signup_page, name='signup_page'),
+
+
+    path('api-login/', LoginView.as_view(), name='login_api'), 
+    path('api-signup/', SignupView.as_view(), name='signup_api'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('me/', MeView.as_view(), name='me'),
 
     
-    path('login-page/', login_page, name='login_page'),
-    path('signup-page/', signup_page, name='signup_page'),
+    
 ]
