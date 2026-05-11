@@ -2,7 +2,6 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-<<<<<<< HEAD
 
 from .models import Borrow
 from .serializers import BorrowSerializer, BorrowCreateSerializer
@@ -10,14 +9,6 @@ from books.models import Book
 from datetime import datetime
 from django.shortcuts import render
 
-=======
-
-from .models import Borrow
-from .serializers import BorrowSerializer, BorrowCreateSerializer
-from books.models import Book
-
-
->>>>>>> 59363e2895372ad8cf83a7d5b11057eec4da5ed2
 # ─────────────────────────────────────────────────────────────
 # Khaled's endpoints
 # ─────────────────────────────────────────────────────────────
@@ -55,11 +46,9 @@ def return_book(request, borrow_id):
     return Response({"message": "Book returned successfully"})
 
 
-<<<<<<< HEAD
 
 def borrowed_books_page(request):
     return render(request, 'pages/borrowed_books.html')
-=======
 # ─────────────────────────────────────────────────────────────
 # Mahmoud's endpoint
 # POST /api/borrow/
@@ -128,4 +117,3 @@ def borrow_book(request):
 
     serializer = BorrowSerializer(borrow)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
->>>>>>> 59363e2895372ad8cf83a7d5b11057eec4da5ed2

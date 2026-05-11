@@ -14,8 +14,6 @@ def is_admin(user):
     return user.is_staff or user.is_superuser or getattr(user, 'is_admin', False)
 
 
-
-
 class BookCreateView(APIView):
     
     permission_classes = [IsAuthenticated]
@@ -187,8 +185,5 @@ def borrow_book_page(request):
     book_id = request.GET.get('id')
     return render(request, 'pages/borrow_book.html', {'book_id': book_id})
 
-<<<<<<< HEAD
-=======
 def home_view(request):
     return render(request, 'pages/index.html')
->>>>>>> 59363e2895372ad8cf83a7d5b11057eec4da5ed2

@@ -51,9 +51,7 @@
             <li><a href="/books/">View Books</a></li>
 
             <!-- ✅ Borrowed Books page -->
-            <li><a href="/borrow/borrowed-books/">Borrowed Books</a></li>
-        </ul>
-    </nav>
+            
 </header> 
 {% load static %}
 <header class="main-header">
@@ -93,12 +91,14 @@
                     <li><a href="{% url 'book-list-admin-page' %}">Edit Books</a></li>
                 {% endif %}
 
-                <li><a href="/my-borrows/">My Borrowed Books</a></li>
+                <li><a href="/borrow/borrowed-books/">Borrowed Books</a></li>
             {% endif %}
         </ul>
     </nav>
 </header>
-
+<!-- <li><a href="/borrow/borrowed-books/">Borrowed Books</a></li>
+        </ul>
+    </nav> -->
 <script>
 (function() {
     const token = localStorage.getItem('token') || localStorage.getItem('access_token');
@@ -128,10 +128,7 @@
         }
     };
 })();
-<<<<<<< HEAD
 </script>
-=======
-</script> -->
 
 {% load static %}
 <header class="main-header">
@@ -170,7 +167,8 @@
                 <li><a href="{% url 'book-list-admin-page' %}">Edit Books</a></li>
             {% endif %}
 
-                <li><a href="/my-borrows/">My Borrowed Books</a></li>
+                <li><a href="/borrow/borrowed-books/">Borrowed Books</a></li>
+                <!-- <li><a href="/my-borrows/">My Borrowed Books</a></li> -->
             {% endif %}
         </ul>
     </nav>
@@ -191,4 +189,3 @@ function handleLogout(e) {
     }
 }
 </script>
->>>>>>> 59363e2895372ad8cf83a7d5b11057eec4da5ed2
