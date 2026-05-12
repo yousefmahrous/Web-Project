@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="search page">
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/details.css' %}">
+    <title>Details</title>
+</head>
+
+<body>
+
+    {% include 'includes/navbar.html' %}
+    <main>
+        <section class="container">
+            <div id="book-details" class="wrapper">
+                <img src="" id="cover" alt="Book cover">
+                <p id="title">
+                    <strong>Book title: </strong>
+                </p>
+                <p id="author">
+                    <strong>Author: </strong>
+                </p>
+                <p id="date">
+                    <strong>Date published: </strong>
+                </p>
+                <p id="category">
+                    <strong>Category: </strong>
+                </p>
+                <p id="available">
+                    <strong>Is it available: </strong>
+                </p>
+                <button id="borrow" disabled>
+                    Borrow now
+                </button>
+            </div>
+            <hr>
+            <div id="book-description" class="wrapper">
+                <p id="description">
+                    <strong>Book description: </strong>
+                    <br>
+                </p>
+            </div>
+        </section>
+    </main>
+    <hr>
+    <footer>
+        <p>&copy; 2026 Knowledge Library. All rights reserved.</p>
+    </footer>
+    <script src="{% static 'js/details.js' %}"></script>
+</body>
+</html>

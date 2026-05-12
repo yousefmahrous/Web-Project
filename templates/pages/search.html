@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="search page">
+
+    <link rel="shortcut icon"
+          href="{% static 'images/logo.png' %}"
+          type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{% static 'css/search.css' %}">
+
+    <title>Search</title>
+</head>
+
+<body>
+
+    {% include 'includes/navbar.html' %}
+
+    <main>
+        <section class="container">
+            <div class="wrapper">
+
+                <h1>Search</h1>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <input type="text"
+                           name="title"
+                           placeholder="Title">
+
+                    <input type="text"
+                           name="author"
+                           placeholder="Author">
+
+                    <input type="text"
+                           name="category"
+                           placeholder="Category"
+                           list="category-list">
+
+                    <br>
+
+                    <button type="submit">Search</button>
+                </form>
+
+                <datalist id="category-list">
+                    {% for category in categories %}
+                        <option value="{{ category }}"></option>
+                    {% endfor %}
+                </datalist>
+
+            </div>
+        </section>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>&copy; 2026 Knowledge Library. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'js/search.js' %}"></script>
+
+</body>
+</html>

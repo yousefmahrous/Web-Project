@@ -44,7 +44,7 @@
         <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'view-books-page' %}">View Books</a></li>
-        <li><a href="/search/">Search</a></li>
+        <li><a href="{% url 'search'}">Search</a></li>
         
         {% if user.is_authenticated %}
             {% if user.is_admin == 1 or user.is_admin == True %}
