@@ -8,7 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from django.shortcuts import render
 from .serializers import SignupSerializer, UserSerializer
-
+from django.contrib.auth import authenticate, login, logout
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -46,6 +46,7 @@ class LoginView(APIView):
         user = authenticate(username=username, password=password)
 
         if user:
+            login(request, user)
             refresh = RefreshToken.for_user(user)
             return Response({
                 'token': str(refresh.access_token),
@@ -56,13 +57,13 @@ class LoginView(APIView):
             {'error': 'Invalid username or password.'},
             status=status.HTTP_401_UNAUTHORIZED
         )
+    
 
 
 class LogoutView(APIView):
-    permission_classes = [IsAuthenticated]
-
+    permission_classes = [AllowAny]
     def post(self, request):
-   
+        logout(request)
         return Response({
             'message': 'Logged out successfully'
         }, status=status.HTTP_200_OK)
