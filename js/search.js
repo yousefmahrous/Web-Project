@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+    fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-container').innerHTML = data;
+    });
+    fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    });
     initSearchPage();
 });
 
@@ -19,7 +29,7 @@ function initSearchPage() {
 
 async function loadCategories(datalist) {
     try {
-        const response = await fetch("http://127.0.0.1:8000/api/categories"); // placeholder API
+        const response = await fetch("/api/categories"); // placeholder API
         const categories = await response.json();
 
         datalist.innerHTML = ""; // clear existing options

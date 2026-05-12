@@ -165,6 +165,8 @@ class CategoryListView(APIView):
 def add_book_page(request):
     return render(request, 'pages/addbook.html')
 
+def search_page(request):
+    return render(request, 'pages/search.html')
 
 def edit_book_page(request):
     book_id = request.GET.get('id')

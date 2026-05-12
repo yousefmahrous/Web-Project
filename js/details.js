@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+    fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-container').innerHTML = data;
+    });
+    fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    });
     const id = getBookIdFromURL();
     loadBookDetails(id);
 });
@@ -15,7 +25,7 @@ async function loadBookDetails(id) {
     }
 
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/books/${id}`);
+        const response = await fetch(`/api/books/${id}`);
         const book = await response.json();
         if (!book) throw new Error("Book not found");
 
