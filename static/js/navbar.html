@@ -1,0 +1,83 @@
+{% load static %}
+<header class="main-header">
+    <nav class="topbar">
+        <div class="left-side">
+            <a href="{% url 'home' %}" class="img-link">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" class="nav-logo-img">
+            </a>
+            <a href="{% url 'home' %}" class="logo-link">
+                <h1 class="logo">Readify</h1>
+            </a>
+            <a href="{% url 'about_page' %}" class="about-link">About Us</a>
+        </div>
+
+       <div class="right-side" id="auth-buttons">
+            {% if user.is_authenticated %}
+            <span class="user-greeting">
+            Hello, {{ user.username }} 
+            {% if user.is_admin == 1 or user.is_admin == True %} (Admin) {% endif %}
+            </span>
+        <a href="#" onclick="handleLogout(event)" class="btn btn-login">Logout</a>
+        {% else %}
+        <a href="{% url 'login_page' %}" class="btn btn-login">LogIn</a>
+        <a href="{% url 'signup_page' %}" class="btn btn-signup">SignUp</a>
+         {% endif %}
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <!-- <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'view-books-page' %}">View Books</a></li>
+            <li><a href="/search/">Search</a></li>
+            
+            {% if user.is_authenticated %}
+                {% if user.is_staff or user.is_superuser %}
+                    <li><a href="{% url 'add-book-page' %}">Add Book</a></li>
+                    <li><a href="{% url 'book-list-admin-page' %}">Edit Books</a></li>
+                {% endif %}
+
+                <li><a href="{% url 'borrowed_books_page' %}">My Borrowed Books</a></li>
+            {% endif %}
+        </ul> -->
+
+        <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'view-books-page' %}">View Books</a></li>
+        <li><a href="/search/">Search</a></li>
+        
+        {% if user.is_authenticated %}
+            {% if user.is_admin == 1 or user.is_admin == True %}
+                <li><a href="{% url 'add-book-page' %}">Add Book</a></li>
+                
+                
+            {% else %}
+                <li><a href="{% url 'borrowed_books_page' %}">My Borrowed Books</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
+    </nav>
+</header>
+
+<script>
+function handleLogout(e) {
+    if (e) e.preventDefault();
+    
+    if (confirm('Are you sure you want to logout?')) {
+        // تأكد إن الرابط ده هو اللي في الـ urls.py للوج أوت
+        fetch('/api/accounts/logout/', { 
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.cookie.match(/csrftoken=([^;]+)/)?.[1] || ''
+            }
+        }).then(response => {
+            if (response.ok) {
+                localStorage.clear();
+                window.location.href = '/accounts/login/';
+            } else {
+                alert("Logout failed on server");
+            }
+        }).catch(err => console.log(err));
+    }
+}
+</script>
