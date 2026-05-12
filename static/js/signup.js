@@ -1,5 +1,20 @@
 const API_URL = '/api';
 
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
 function showError(fieldId, message) {
   const field = document.getElementById(fieldId);
   field.classList.add('error');
@@ -82,7 +97,7 @@ function validate(e) {
 
   const is_admin = role ? role.value === 'Admin' : false;
 
-  fetch(`${API_URL}/accounts/signup/`, {
+fetch(`${API_URL}/accounts/api-signup/`, {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
@@ -96,25 +111,38 @@ function validate(e) {
       is_admin
     })
   })
-  .then(res => {
-    if (!res.ok) {
-      return res.json().then(err => { throw new Error(Object.values(err)[0] || 'Signup failed'); });
+  .then(async res => {
+    const contentType = res.headers.get('content-type');
+    const isJson = contentType && contentType.includes('application/json');
+
+    let data;
+    if (isJson) {
+      data = await res.json();
+    } else {
+      const text = await res.text();
+      console.error('Server returned non-JSON:', text.substring(0, 500));
+      throw new Error(`Server error ${res.status}: ${res.statusText}`);
     }
-    return res.json();
+
+    if (!res.ok) {
+      const msg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Signup failed';
+      throw new Error(msg);
+    }
+    return data;
   })
   .then(data => {
     console.log('Signup response:', data);
-    
+
     const token = data.token || data.access;
     if (!token) {
       throw new Error('No token received from server');
     }
-    
+
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(data.user));
-    
+
     console.log('Token saved:', token);
-    
+
     window.location.href = '/';
   })
   .catch(err => {

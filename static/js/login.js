@@ -44,7 +44,8 @@ function validate(e) {
 
   if (!valid) return;
 
-  fetch(`${API_URL}/accounts/login/`, {
+  // ✅ تم تصحيح الـ endpoint من login/ إلى api-login/
+  fetch(`${API_URL}/accounts/api-login/`, {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
@@ -61,7 +62,6 @@ function validate(e) {
   .then(data => {
     console.log('Login response:', data);
     
-   
     const token = data.token || data.access;
     if (!token) {
       throw new Error('No token received from server');
