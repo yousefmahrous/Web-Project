@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // سحب التوكن فقط (حتى لو مش مستخدمه في الـ User، الـ API بيحتاجه للكتب)
     const token = localStorage.getItem('token') || localStorage.getItem('access_token');
 
+    // ... (نفس الجزء الأول من الكود)
+
     async function loadBorrowedBooks() {
         try {
             const response = await fetch('/api/borrow/my-borrows/', {
@@ -21,26 +23,32 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             const myBooks = await response.json();
-            render(myBooks);
+            
+            // ✅ التعديل هنا: فلترة الكتب عشان نعرض اللي لسه مرجعتش بس
+            // بنفترض إن السيرفر بيبعت حقل اسمه returned (زي ما شفنا في الـ Views)
+            const activeBorrows = myBooks.filter(book => book.returned === false);
+            
+            render(activeBorrows);
         } catch (error) {
             bookList.innerHTML = `<li style="padding:15px;color:red;">Server Error</li>`;
         }
     }
 
     function render(myBooks) {
-        // تحديث الـ Badge (عدد الكتب)
+        // تحديث الـ Badge
         const existingBadge = document.querySelector('.counter-badge');
         if (existingBadge) existingBadge.remove();
 
         const badge = document.createElement('span');
         badge.className = 'counter-badge';
-        badge.innerText = `${myBooks.length} Books`;
+        // هيعرض عدد الكتب "النشطة" حالياً
+        badge.innerText = `${myBooks.length} Books to Return`; 
         panelTitle.appendChild(badge);
 
         bookList.innerHTML = "";
 
         if (myBooks.length === 0) {
-            bookList.innerHTML = `<li style='padding:15px; color:gray;'>No books found.</li>`;
+            bookList.innerHTML = `<li style='padding:15px; color:gray;'>All books returned. Nice!</li>`;
             return;
         }
 
@@ -58,6 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+// ... (بقية كود الـ returnBook سليم زي ما هو)
     window.returnBook = async (id) => {
         if(!confirm("Return this book?")) return;
         try {

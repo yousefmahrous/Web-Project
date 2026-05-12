@@ -25,6 +25,7 @@ def my_borrows(request):
 @permission_classes([IsAuthenticated])
 def return_book(request, borrow_id):
     try:
+        
         borrow = Borrow.objects.get(id=borrow_id, user=request.user)
     except Borrow.DoesNotExist:
         return Response(
@@ -38,13 +39,15 @@ def return_book(request, borrow_id):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-    borrow.returned       = True
-    borrow.book.available = True
-    borrow.save()
-    borrow.book.save()
+    
+    borrow.returned = True
+    borrow.save() 
 
+    
+    book = borrow.book 
+    book.available = True
+    book.save() 
     return Response({"message": "Book returned successfully"})
-
 
 
 def borrowed_books_page(request):
