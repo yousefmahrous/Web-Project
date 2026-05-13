@@ -1,8 +1,3 @@
-/* ============================================================
-   view_books.js  —  Phase 3
-   GET /api/books/  →  BookListView (AllowAny — no token needed)
-   ============================================================ */
-
 let ALL_BOOKS = [];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("categoryFilter").addEventListener("change", renderBooks);
 });
 
-//  Navbar
+
 function loadNavbar() {
     const container = document.getElementById("navbar-container");
     if (!container) return;
@@ -23,17 +18,27 @@ function loadNavbar() {
         .catch(() => console.warn("Navbar load failed"));
 }
 
-//  Get token — matches login.js which saves as 'token'
 function getToken() {
     return localStorage.getItem('token') || localStorage.getItem('access_token');
 }
 
-//  Fetch all books from Django API
+
+
+function isAdmin() {
+    try {
+        const user = JSON.parse(localStorage.getItem('user'));
+        return !!(user && (user.is_admin || user.is_staff || user.role === 'admin'));
+    } catch {
+        return false;
+    }
+}
+
+
 function fetchBooks() {
     const countEl = document.getElementById("resultsCount");
     countEl.textContent = "Loading…";
 
-    // BookListView has AllowAny — token not required but send if available
+
     const token = getToken();
     const headers = { 'Content-Type': 'application/json' };
     if (token) headers['Authorization'] = `Bearer ${token}`;
@@ -56,7 +61,7 @@ function fetchBooks() {
     });
 }
 
-//  Category filter
+
 function buildCategoryFilter(books) {
     const select = document.getElementById("categoryFilter");
     while (select.options.length > 1) select.remove(1);
@@ -69,7 +74,7 @@ function buildCategoryFilter(books) {
     });
 }
 
-//  Filter + render
+
 function renderBooks() {
     const query    = document.getElementById("searchInput").value.trim().toLowerCase();
     const status   = document.getElementById("statusFilter").value;
@@ -96,7 +101,7 @@ function renderBooks() {
     displayBooks(filtered);
 }
 
-//  Build cards
+
 function displayBooks(books) {
     const grid       = document.getElementById("books-grid");
     const emptyState = document.getElementById("empty-state");
@@ -126,8 +131,9 @@ function displayBooks(books) {
         const statusClass = isAvailable ? "status-available" : "status-borrowed";
         const statusText  = isAvailable ? "Available" : "Borrowed";
         const borrowClass = isAvailable ? "btn-borrow" : "btn-borrow disabled";
+        const userIsAdmin = isAdmin();
 
-        // image_url = absolute URL from BookSerializer.get_image_url()
+    
         const coverHTML = book.image_url
             ? `<div class="book-card-img"><img src="${escapeHTML(book.image_url)}" alt="Cover of ${escapeHTML(book.title)}" onerror="this.parentElement.innerHTML='📖'"></div>`
             : `<div class="book-card-img">📖</div>`;
@@ -146,6 +152,11 @@ function displayBooks(books) {
                        ${!isAvailable ? 'aria-disabled="true" tabindex="-1" onclick="return false;"' : ''}>
                         Borrow
                     </a>
+                    ${userIsAdmin
+                        ? (isAvailable
+                            ? `<a href="/books/edit/?id=${book.id}" class="btn-edit">Edit</a>`
+                            : `<a class="btn-edit disabled" aria-disabled="true" tabindex="-1" onclick="return false;">Edit</a>`)
+                        : ''}
                 </div>
             </div>
         `;
