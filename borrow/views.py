@@ -64,6 +64,13 @@ def borrowed_books_page(request):
 @permission_classes([IsAuthenticated])
 def borrow_book(request):
 
+    # ── Admins cannot borrow books ────────────────────────────
+    if request.user.is_staff or request.user.is_superuser or getattr(request.user, 'is_admin', False):
+        return Response(
+            {"error": "Admins cannot borrow books."},
+            status=status.HTTP_403_FORBIDDEN
+        )
+
     # Validate input
     input_serializer = BorrowCreateSerializer(data=request.data)
     if not input_serializer.is_valid():

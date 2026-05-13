@@ -147,11 +147,13 @@ function displayBooks(books) {
                 <span class="book-card-status ${statusClass}">${statusText}</span>
                 <div class="book-card-actions">
                     <a href="/books/details/?id=${book.id}" class="btn-details">Details</a>
-                    <a href="/books/borrow/?id=${book.id}"
-                       class="${borrowClass}"
-                       ${!isAvailable ? 'aria-disabled="true" tabindex="-1" onclick="return false;"' : ''}>
-                        Borrow
-                    </a>
+                    ${!userIsAdmin
+                        ? `<a href="/books/borrow/?id=${book.id}"
+                               class="${borrowClass}"
+                               ${!isAvailable ? 'aria-disabled="true" tabindex="-1" onclick="return false;"' : ''}>
+                                Borrow
+                           </a>`
+                        : ''}
                     ${userIsAdmin
                         ? (isAvailable
                             ? `<a href="/books/edit/?id=${book.id}" class="btn-edit">Edit</a>`

@@ -37,11 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // ── Admin guard: admins manage books, they don't borrow them ─
+    try {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const admin = !!(user && (user.is_admin || user.is_staff || user.role === 'admin'));
+        if (admin) {
+            showGlobalError("Admins cannot borrow books. Use the Edit Books section to manage the catalog.");
+            return;
+        }
+    } catch { /* ignore parse errors */ }
+
     fetchBookDetails(bookId);
     document.getElementById("borrowForm").addEventListener("submit", (e) => handleSubmit(e, bookId));
 });
-
-//  Navbar
 function loadNavbar() {
     const container = document.getElementById("navbar-container");
     if (!container) return;
@@ -226,7 +234,7 @@ function showFormError(message) {
 function showGlobalError(message) {
     document.getElementById("unavailable-notice").innerHTML =
         `<p>${escapeHTML(message)}</p>
-         <a href="/books/view/" class="btn-back">← Back to Catalog</a>`;
+         <a href="view_books.html" class="btn-back">← Back to Catalog</a>`;
     document.getElementById("unavailable-notice").style.display = "block";
     const s = document.getElementById("borrow-section");
     const p = document.getElementById("book-preview");
