@@ -5,7 +5,6 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404, render
 from django.db import IntegrityError
 
-from django.shortcuts import render
 from .models import Book
 from .serializers import BookSerializer
 
@@ -15,24 +14,22 @@ def is_admin(user):
 
 
 class BookCreateView(APIView):
-    
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         if not is_admin(request.user):
             return Response(
-                {"error": "Only admins can add books"}, 
+                {"error": "Only admins can add books"},
                 status=status.HTTP_403_FORBIDDEN
             )
 
-       
         data = {
-            'book_id': request.data.get('bookid'),
-            'title': request.data.get('bookname'),
-            'author': request.data.get('author'),
-            'category': request.data.get('category'),
+            'book_id':     request.data.get('bookid'),
+            'title':       request.data.get('bookname'),
+            'author':      request.data.get('author'),
+            'category':    request.data.get('category'),
             'description': request.data.get('description'),
-            'available': request.data.get('available', True),
+            'available':   request.data.get('available', True),
         }
 
         if 'image' in request.FILES:
@@ -54,8 +51,10 @@ class BookCreateView(APIView):
 
 
 class BookDetailView(APIView):
-    
-    permission_classes = [IsAuthenticated]
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def get(self, request, id):
         try:
@@ -75,17 +74,29 @@ class BookDetailView(APIView):
         except Book.DoesNotExist:
             book = get_object_or_404(Book, id=id)
 
-        
-        data = {
-            'book_id': request.data.get('bookid'),
-            'title': request.data.get('bookname'),
-            'author': request.data.get('author'),
-            'category': request.data.get('category'),
-            'description': request.data.get('description'),
-        }
+        data = {}
 
-        
-        data = {k: v for k, v in data.items() if v is not None}
+        bookname = request.data.get('bookname')
+        if bookname is not None:
+            data['title'] = bookname
+
+        author = request.data.get('author')
+        if author is not None:
+            data['author'] = author
+
+        category = request.data.get('category')
+        if category is not None:
+            data['category'] = category
+
+        description = request.data.get('description')
+        if description is not None:
+            data['description'] = description
+
+        if not data and 'image' not in request.FILES:
+            return Response(
+                {"error": "No data provided to update."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         if 'image' in request.FILES:
             data['image'] = request.FILES['image']
@@ -98,7 +109,7 @@ class BookDetailView(APIView):
                 old_image.delete(save=False)
             return Response({
                 "message": "Book updated successfully",
-                "data": serializer.data
+                "data": BookSerializer(book, context={'request': request}).data
             })
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -124,10 +135,10 @@ class BookSearchView(APIView):
     def get(self, request):
         queryset = Book.objects.all()
 
-        title = request.GET.get('title')
-        author = request.GET.get('author')
+        title    = request.GET.get('title')
+        author   = request.GET.get('author')
         category = request.GET.get('category')
-        book_id = request.GET.get('bookid')
+        book_id  = request.GET.get('bookid')
 
         if book_id:
             queryset = queryset.filter(book_id=book_id)
@@ -160,7 +171,7 @@ class CategoryListView(APIView):
         return Response(list(categories))
 
 
-
+# ── Template Views ────────────────────────────────────────────
 
 def add_book_page(request):
     return render(request, 'pages/addbook.html')
@@ -172,20 +183,19 @@ def edit_book_page(request):
     book_id = request.GET.get('id')
     return render(request, 'pages/editbook.html', {'book_id': book_id})
 
-
 def book_list_admin_page(request):
-    return render(request, 'pages/book-list-admin.html')
-
+    return render(request, '/')
 
 def view_books_page(request):
-    """Serves the main library catalog page — /books/view/"""
     return render(request, 'pages/view_books.html')
 
-
 def borrow_book_page(request):
-    """Serves the borrow form page — /books/borrow/?id=<book_id>"""
     book_id = request.GET.get('id')
     return render(request, 'pages/borrow_book.html', {'book_id': book_id})
+
+def details_page(request):
+    book_id = request.GET.get('id')
+    return render(request, 'pages/details.html', {'book_id': book_id})
 
 def home_view(request):
     return render(request, 'pages/index.html')

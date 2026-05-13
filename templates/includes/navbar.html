@@ -11,61 +11,43 @@
             <a href="{% url 'about_page' %}" class="about-link">About Us</a>
         </div>
 
-       <div class="right-side" id="auth-buttons">
+        <div class="right-side" id="auth-buttons">
             {% if user.is_authenticated %}
             <span class="user-greeting">
-            Hello, {{ user.username }} 
-            {% if user.is_admin == 1 or user.is_admin == True %} (Admin) {% endif %}
+                Hello, {{ user.username }}
+                {% if user.is_admin == 1 or user.is_admin == True %} (Admin) {% endif %}
             </span>
-        <a href="#" onclick="handleLogout(event)" class="btn btn-login">Logout</a>
-        {% else %}
-        <a href="{% url 'login_page' %}" class="btn btn-login">LogIn</a>
-        <a href="{% url 'signup_page' %}" class="btn btn-signup">SignUp</a>
-         {% endif %}
+            <a href="#" onclick="handleLogout(event)" class="btn btn-login">Logout</a>
+            {% else %}
+            <a href="{% url 'login_page' %}" class="btn btn-login">LogIn</a>
+            <a href="{% url 'signup_page' %}" class="btn btn-signup">SignUp</a>
+            {% endif %}
         </div>
     </nav>
 
     <nav class="navbar">
-        <!-- <ul>
+        <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'view-books-page' %}">View Books</a></li>
-            <li><a href="/search/">Search</a></li>
-            
             {% if user.is_authenticated %}
-                {% if user.is_staff or user.is_superuser %}
+                {% if user.is_admin == 1 or user.is_admin == True %}
                     <li><a href="{% url 'add-book-page' %}">Add Book</a></li>
-                    <li><a href="{% url 'book-list-admin-page' %}">Edit Books</a></li>
+                    <li><a href="{% url 'search' %}">Search</a></li>
+                {% else %}
+                    <li><a href="{% url 'borrowed_books_page' %}">My Borrowed Books</a></li>
+                    <li><a href="{% url 'search' %}">Search</a></li>
                 {% endif %}
-
-                <li><a href="{% url 'borrowed_books_page' %}">My Borrowed Books</a></li>
             {% endif %}
-        </ul> -->
-
-        <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'view-books-page' %}">View Books</a></li>
-        <li><a href="{% url 'search' %}">Search</a></li>
-        
-        {% if user.is_authenticated %}
-            {% if user.is_admin == 1 or user.is_admin == True %}
-                <li><a href="{% url 'add-book-page' %}">Add Book</a></li>
-                <li><a href="{% url 'book-list-admin-page' %}">Edit Books</a></li>
-                
-            {% else %}
-                <li><a href="{% url 'borrowed_books_page' %}">My Borrowed Books</a></li>
-            {% endif %}
-        {% endif %}
-    </ul>
+        </ul>
     </nav>
 </header>
 
 <script>
 function handleLogout(e) {
     if (e) e.preventDefault();
-    
+
     if (confirm('Are you sure you want to logout?')) {
-        // تأكد إن الرابط ده هو اللي في الـ urls.py للوج أوت
-        fetch('/api/accounts/logout/', { 
+        fetch('/api/accounts/logout/', {
             method: 'POST',
             headers: {
                 'X-CSRFToken': document.cookie.match(/csrftoken=([^;]+)/)?.[1] || ''

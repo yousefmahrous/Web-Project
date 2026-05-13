@@ -9,15 +9,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
     
-    # ✅ المسار اللي كان بيضرب 404
     path('about/', about_page, name='about_page'),
 
-    # ✅ Template Routes
     path('books/', include('books.template_urls')),
-    path('borrow/', include('borrow.urls')), # الصفحة والـ API مع بعض
-    path('accounts/', include('accounts.urls')), # صفحات الـ Login/Signup
+    path('borrow/', include('borrow.urls')),
+    path('accounts/', include('accounts.urls')),
 
-    # ✅ API Routes (للموبايل أو الـ JS)
     path('api/accounts/', include('accounts.urls')),
     path('api/books/', include('books.api_urls')),
     path('api/borrow/', include('borrow.urls')),

@@ -9,9 +9,6 @@ from books.models import Book
 from datetime import datetime
 from django.shortcuts import render
 
-# ─────────────────────────────────────────────────────────────
-# Khaled's endpoints
-# ─────────────────────────────────────────────────────────────
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -52,13 +49,6 @@ def return_book(request, borrow_id):
 
 def borrowed_books_page(request):
     return render(request, 'pages/borrowed_books.html')
-# ─────────────────────────────────────────────────────────────
-# Mahmoud's endpoint
-# POST /api/borrow/
-# main urls.py: path('api/borrow/', include('borrow.urls'))
-# borrow urls.py: path('', borrow_book)
-# → full URL = /api/borrow/
-# ─────────────────────────────────────────────────────────────
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
