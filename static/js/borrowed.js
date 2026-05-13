@@ -2,10 +2,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const bookList = document.getElementById('Borrowed-Books');
     const panelTitle = document.getElementById('panel-title');
     
-    // سحب التوكن فقط (حتى لو مش مستخدمه في الـ User، الـ API بيحتاجه للكتب)
     const token = localStorage.getItem('token') || localStorage.getItem('access_token');
 
-    // ... (نفس الجزء الأول من الكود)
 
     async function loadBorrowedBooks() {
         try {
@@ -24,8 +22,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const myBooks = await response.json();
             
-            // ✅ التعديل هنا: فلترة الكتب عشان نعرض اللي لسه مرجعتش بس
-            // بنفترض إن السيرفر بيبعت حقل اسمه returned (زي ما شفنا في الـ Views)
             const activeBorrows = myBooks.filter(book => book.returned === false);
             
             render(activeBorrows);
@@ -35,13 +31,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function render(myBooks) {
-        // تحديث الـ Badge
         const existingBadge = document.querySelector('.counter-badge');
         if (existingBadge) existingBadge.remove();
 
         const badge = document.createElement('span');
         badge.className = 'counter-badge';
-        // هيعرض عدد الكتب "النشطة" حالياً
         badge.innerText = `${myBooks.length} Books to Return`; 
         panelTitle.appendChild(badge);
 
@@ -66,7 +60,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-// ... (بقية كود الـ returnBook سليم زي ما هو)
     window.returnBook = async (id) => {
         if(!confirm("Return this book?")) return;
         try {

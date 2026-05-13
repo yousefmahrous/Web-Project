@@ -1,10 +1,3 @@
-/* ============================================================
-   borrow_book.js  —  Phase 3
-   GET  /api/books/<id>/  →  BookDetailView  (IsAuthenticated)
-   POST /api/borrow/      →  borrow_book     (IsAuthenticated)
-
-   Token key: 'token' — matches login.js / addbook.js
-   ============================================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
     loadNavbar();
@@ -232,9 +225,7 @@ function showFormError(message) {
 }
 
 function showGlobalError(message) {
-    document.getElementById("unavailable-notice").innerHTML =
-        `<p>${escapeHTML(message)}</p>
-         <a href="view_books.html" class="btn-back">← Back to Catalog</a>`;
+    document.getElementById("unavailable-notice").innerHTML =`<p>${escapeHTML(message)}</p>`;
     document.getElementById("unavailable-notice").style.display = "block";
     const s = document.getElementById("borrow-section");
     const p = document.getElementById("book-preview");

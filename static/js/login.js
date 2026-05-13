@@ -44,7 +44,6 @@ function validate(e) {
 
   if (!valid) return;
 
-  // ✅ تم تصحيح الـ endpoint من login/ إلى api-login/
   fetch(`${API_URL}/accounts/api-login/`, {
     method: 'POST',
     headers: { 

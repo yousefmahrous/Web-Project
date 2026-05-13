@@ -1,67 +1,62 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const navContainer = document.getElementById('navbar-container');
-    
-    if (navContainer) {
-        fetch('navbar.html') 
-            .then(response => {
-                if (response.ok) return response.text();
-                throw new Error('Navbar file not found');
-            })
-            .then(data => {
-                navContainer.innerHTML = data;
-                console.log("Navbar loaded!");
-            })
-            .catch(err => console.error("Error loading navbar:", err));
-    }
-
-
-    const form = document.getElementById("addForm");
-    const clearBtn = document.getElementById("clearButton");
-
-   
+    // ── Helpers ──────────────────────────────────────────────
     function showError(fieldId, message) {
         const field = document.getElementById(fieldId);
-
         field.classList.add("error");
-
         const oldError = field.parentElement.querySelector(".error-msg");
         if (oldError) oldError.remove();
-
         const msg = document.createElement("span");
         msg.className = "error-msg";
         msg.textContent = message;
-
         field.parentElement.appendChild(msg);
     }
-
 
     function clearErrors() {
         document.querySelectorAll(".error").forEach(el => el.classList.remove("error"));
         document.querySelectorAll(".error-msg").forEach(el => el.remove());
     }
 
-   
-    function validateForm(e) {
+    function getToken() {
+        return localStorage.getItem('token') || localStorage.getItem('access_token');
+    }
+
+    const token = getToken();
+    if (!token) {
+        alert("Please login first.");
+        window.location.href = "/accounts/login/";
+        return;
+    }
+
+    try {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const isAdmin = !!(user && (user.is_admin || user.is_staff || user.role === 'admin'));
+        if (!isAdmin) {
+            alert("Admins only.");
+            window.location.href = "/";
+            return;
+        }
+    } catch { /* ignore */ }
+
+    // ── Validation ───────────────────────────────────────────
+    function validateForm() {
         clearErrors();
         let valid = true;
 
-        const bookid = document.getElementById("bookid").value.trim();
-        const bookname = document.getElementById("bookname").value.trim();
-        const author = document.getElementById("author").value.trim();
-        const category = document.getElementById("category").value;
+        const bookid      = document.getElementById("bookid").value.trim();
+        const bookname    = document.getElementById("bookname").value.trim();
+        const author      = document.getElementById("author").value.trim();
+        const category    = document.getElementById("category").value;
         const description = document.getElementById("description").value.trim();
 
-       
         if (!bookid) {
             showError("bookid", "Book ID is required");
             valid = false;
-        } else if (bookid <= 0) {
+        } else if (parseInt(bookid) <= 0) {
             showError("bookid", "Book ID must be greater than 0");
             valid = false;
         }
 
-      
         if (!bookname) {
             showError("bookname", "Book name is required");
             valid = false;
@@ -70,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
             valid = false;
         }
 
-        
         if (!author) {
             showError("author", "Author name is required");
             valid = false;
@@ -79,13 +73,11 @@ document.addEventListener("DOMContentLoaded", function () {
             valid = false;
         }
 
-        
         if (!category) {
             showError("category", "Please select a category");
             valid = false;
         }
 
-        
         if (!description) {
             showError("description", "Description is required");
             valid = false;
@@ -94,30 +86,74 @@ document.addEventListener("DOMContentLoaded", function () {
             valid = false;
         }
 
-        
-        if (!valid) {
-            e.preventDefault();
-            return;
-        }
-
-        
-        const confirmSave = confirm("Are you sure you want to add this book?");
-        if (!confirmSave) {
-            e.preventDefault();
-        }
+        return valid;
     }
 
-    
+    // ── Form Submit → POST /api/books/create/ ────────────────
+    const form = document.getElementById("addForm");
+
     if (form) {
-        form.addEventListener("submit", validateForm);
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            if (!validateForm()) return;
+
+            const confirmSave = confirm("Are you sure you want to add this book?");
+            if (!confirmSave) return;
+
+            const formData = new FormData();
+            formData.append("bookid",      document.getElementById("bookid").value.trim());
+            formData.append("bookname",    document.getElementById("bookname").value.trim());
+            formData.append("author",      document.getElementById("author").value.trim());
+            formData.append("category",    document.getElementById("category").value);
+            formData.append("description", document.getElementById("description").value.trim());
+            formData.append("available",   "true");
+
+            const imageField = document.getElementById("image");
+            if (imageField && imageField.files.length > 0) {
+                formData.append("image", imageField.files[0]);
+            }
+
+            fetch("/api/books/create/", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: formData,
+            })
+            .then(response => response.json().then(data => ({ status: response.status, data })))
+            .then(({ status, data }) => {
+                if (status === 201) {
+                    alert("Book added successfully!");
+                    window.location.href = "/";
+                } else if (status === 401) {
+                    alert("Session expired. Please login again.");
+                    window.location.href = "/accounts/login/";
+                } else {
+                    const pick = v => Array.isArray(v) ? v[0] : v;
+                    if (data.book_id)     showError("bookid",      pick(data.book_id));
+                    if (data.title)       showError("bookname",    pick(data.title));
+                    if (data.author)      showError("author",      pick(data.author));
+                    if (data.category)    showError("category",    pick(data.category));
+                    if (data.description) showError("description", pick(data.description));
+                    if (data.error)       alert(data.error);
+                }
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                alert("Something went wrong. Please try again.");
+            });
+        });
     }
 
-    
+    // ── Clear Button ─────────────────────────────────────────
+    const clearBtn = document.getElementById("clearButton");
     if (clearBtn) {
-        clearBtn.addEventListener("click", function (e) {
+        clearBtn.addEventListener("click", function () {
             const confirmClear = confirm("Are you sure you want to clear all fields?");
-            if (!confirmClear) {
-                e.preventDefault();
+            if (confirmClear) {
+                form.reset();
+                clearErrors();
             }
         });
     }
